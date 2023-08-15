@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -25,7 +26,15 @@ func Connect() {
 
 	DB = database
 
-	database.AutoMigrate(
+	tables := []interface{}{
 		&models.User{},
-	)
+		&models.Post{},
+	}
+
+	for _, table := range tables {
+		result := database.AutoMigrate(table)
+		if result == nil {
+			fmt.Printf("Successfully migrated table: %T\n", table)
+		}
+	}
 }

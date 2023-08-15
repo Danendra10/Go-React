@@ -11,6 +11,7 @@ import (
 	"github.com/danendra10/gowlang-first/database"
 	"github.com/danendra10/gowlang-first/models"
 	"github.com/danendra10/gowlang-first/utils"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -118,4 +119,9 @@ func Login(c *fiber.Ctx) error {
 		"user":    user,
 		"token":   token,
 	})
+
+}
+
+type Claims struct {
+	jwt.StandardClaims
 }
